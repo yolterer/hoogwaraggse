@@ -33,12 +33,9 @@ public class PlayerController : MonoBehaviour
             mousePosition.y - transform.position.y
         );
 
-        //transform.up = direction;
-        // Убрали строку, которая вызывает вращение
-
         // Movement
-        float horizontalMove =  0f;
-        float verticalMove =  0f;
+        float horizontalMove =   0f;
+        float verticalMove =   0f;
 
         if (Input.GetKey(KeyCode.Space) && _characterController.isGrounded)
         {
@@ -47,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            verticalMove =  1f;
+            verticalMove =   1f;
         }
         else if (Input.GetKey(KeyCode.S))
         {
@@ -60,11 +57,12 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            horizontalMove =  1f;
+            horizontalMove =   1f;
         }
 
         // Используйте CharacterController для движения
-        Vector3 moveDirection = new Vector3(horizontalMove,  0, verticalMove).normalized;
+        // Преобразуйте направление движения в мировую систему координат
+        Vector3 moveDirection = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y,  0) * new Vector3(horizontalMove,   0, verticalMove).normalized;
         _characterController.Move(moveDirection * speed * Time.deltaTime);
     }
 

@@ -4,31 +4,23 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float minAngle;
     public float maxAngle;
+    public float minAngle;
     public Transform CameraAxisTransform;
-    public float rotationSpeed;
-   private Vector3 lastMousePosition;
-
+    public float RotationSpeed;
     void Start()
     {
-        lastMousePosition = Input.mousePosition;
+       
     }
 
     void Update()
     {
-        Vector3 delta = Input.mousePosition - lastMousePosition;
+        transform.localEulerAngles = new Vector3(0,transform.localEulerAngles.y + Time.deltaTime * RotationSpeed * Input.GetAxis("Mouse X"), 0);
 
-        if (delta.magnitude >  0)
-        {
-            transform.Rotate(0, delta.x * rotationSpeed * Time.deltaTime,  0);
-            var currentAngleX = CameraAxisTransform.localEulerAngles.x;
-            var newAngleX = currentAngleX - delta.y * rotationSpeed * Time.deltaTime;
-            newAngleX = Mathf.Clamp(newAngleX, minAngle, maxAngle);
-            CameraAxisTransform.localEulerAngles = new Vector3(newAngleX,  0,  0);
-        }
+        var newAngleX = CameraAxisTransform.localEulerAngles.x - Time.deltaTime * RotationSpeed * Input.GetAxis("Mouse Y");
+        newAngleX = Mathf.Clamp(newAngleX, minAngle, maxAngle);
 
-        lastMousePosition = Input.mousePosition;
+        CameraAxisTransform.localEulerAngles = new Vector3(newAngleX, 0, 0);
     }
 
 
