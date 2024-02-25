@@ -58,10 +58,16 @@ public class EnemyAI : MonoBehaviour
 
     private void PatrolUpdate()
     {
-        if (_navMeshAgent.remainingDistance == 0)
+        if(!_isPlayerNoticed)
         {
-            PickNewPatrolPoit();
+            if (_navMeshAgent.remainingDistance == 0)
+            {
+                PickNewPatrolPoit();
+            }
+        }    
+        if (_isPlayerNoticed == true)
+        {
+            _navMeshAgent.destination = player.transform.position;
         }
-        
     }
 }
