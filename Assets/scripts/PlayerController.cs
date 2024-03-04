@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,9 +59,6 @@ public class PlayerController : MonoBehaviour
         {
             horizontalMove =   1f;
         }
-
-        // Используйте CharacterController для движения
-        // Преобразуйте направление движения в мировую систему координат
         Vector3 moveDirection = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y,  0) * new Vector3(horizontalMove,   0, verticalMove).normalized;
         _characterController.Move(moveDirection * speed * Time.deltaTime);
     }
