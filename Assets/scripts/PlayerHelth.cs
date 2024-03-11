@@ -43,4 +43,12 @@ public class PlayerHelth : MonoBehaviour
        GetComponent<CameraController>().enabled = false;    
 
     }
+
+    public void AddHealth(float amount)
+    {
+        value += amount;
+        value = Mathf.Clamp(value, 0, _maxValue);
+        DrawHealthBar();
+    }
+
 }
