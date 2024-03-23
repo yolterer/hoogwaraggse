@@ -6,6 +6,14 @@ public class EnemyHealf : MonoBehaviour
 {
     public static float value = 100;
     public static float damage = 10;
+    public lvlPlayer lvlPlayer;
+
+    public bool IsAlive()
+    {
+        return value > 0;
+    }
+
+   
     void Start()
     {
         
@@ -17,12 +25,22 @@ public class EnemyHealf : MonoBehaviour
                 
     }
 
-    public  void DealDamage(float damageToDeal)
+   public void DealDamage(float damageToDeal)
     {
-        EnemyHealf.value -= damage;
-           if (EnemyHealf.value <= 0)
-           {
-               Destroy(gameObject);
-           }
+    if (lvlPlayer != null)
+    {
+        lvlPlayer.AddExperience(damage);
     }
+    else
+    {
+        Debug.LogError("lvlPlayer is null");
+    }
+
+    EnemyHealf.value -= damage;
+    if (EnemyHealf.value <= 0)
+    {
+        Destroy(gameObject);
+    }
+}
+
 }

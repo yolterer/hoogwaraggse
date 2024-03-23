@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    public lvlPlayer lvlPlayer;
     public List<Transform> patrolPoints;
     public PlayerController player;
     public float viewAngle;
@@ -12,6 +13,12 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent _navMeshAgent;
     private bool _isPlayerNoticed;
     private PlayerHelth _playerHelth;
+    private EnemyHealf _enemyHealf;
+
+    public bool IsAlive()
+    {
+        return _enemyHealf.IsAlive();
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -24,6 +31,7 @@ public class EnemyAI : MonoBehaviour
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _playerHelth = player.GetComponent<PlayerHelth>();
+        _enemyHealf = GetComponent<EnemyHealf>();
     }
 
     private void Update()

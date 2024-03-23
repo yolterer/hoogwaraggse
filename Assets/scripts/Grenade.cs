@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
+    public float damage = 50;
     public float delay = 3;
     public GameObject explosionPrefab;
 
@@ -29,5 +30,6 @@ public class Grenade : MonoBehaviour
         Destroy(gameObject);
         var Explosion = Instantiate(explosionPrefab);
         Explosion.transform.position = transform.position;
+        Explosion.GetComponent<Explosion>().damage = damage;
     }
 }

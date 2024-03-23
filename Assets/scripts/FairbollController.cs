@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FairbollController : MonoBehaviour
 {
+    public float damage = 10;
+
     public fireball fireballPrefabe;
     public Transform fireballSourceTransform;
     // Start is called before the first frame update
@@ -17,7 +19,8 @@ public class FairbollController : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Instantiate(fireballPrefabe, fireballSourceTransform.position,fireballSourceTransform.rotation);
+           var fireball = Instantiate(fireballPrefabe, fireballSourceTransform.position,fireballSourceTransform.rotation);
+           fireball.damage = damage;
         }
         
     }
